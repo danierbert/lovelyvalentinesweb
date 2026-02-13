@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Valentine's Day ❤️</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #E63946;
+            --secondary: #F1FAEE;
+            --accent: #A8DADC;
+            --dark: #1D3557;
+            --gold: #FFD700;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: var(--dark);
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* Animated Background */
+        .hearts-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .floating-heart {
+            position: absolute;
+            font-size: 30px;
+            animation: floatHeart 10s infinite ease-in-out;
+            opacity: 0.3;
+        }
+
+        @keyframes floatHeart {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.6;
+            }
+            90% {
+                opacity: 0.6;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Main Container */
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Welcome Screen */
+        .welcome-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            transition: opacity 1s ease, visibility 1s ease;
+        }
+
+        .welcome-screen.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .welcome-screen h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            color: white;
+            margin-bottom: 30px;
+            text-align: center;
+            animation: fadeInScale 1s ease-out;
+        }
+
+        .welcome-screen p {
+            font-size: 1.5rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 50px;
+            text-align: center;
+            animation: fadeInScale 1s ease-out 0.3s backwards;
+        }
+
+        .start-button {
+            padding: 20px 50px;
+            font-size: 1.3rem;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            box-shadow: 0 10px 30px rgba(230, 57, 70, 0.4);
+            animation: fadeInScale 1s ease-out 0.6s backwards, pulse 2s infinite 1.6s;
+        }
+
+        .start-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 40px rgba(230, 57, 70, 0.6);
+        }
+
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        /* Main Content */
+        .main-content {
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 1s ease 0.5s, visibility 0s 0.5s;
+        }
+
+        .main-content.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Header with Music Control */
+        .header {
+            text-align: center;
+            padding: 40px 20px;
+            color: white;
+        }
+
+        .header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            margin-bottom: 10px;
+        }
+
+        .music-control {
+            margin: 30px auto;
+            max-width: 600px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .message-box {
+            padding: 25px 40px;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            color: white;
+            border-radius: 20px;
+            font-size: 1.2rem;
+            text-align: center;
+            line-height: 1.8;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            animation: fadeInScale 1s ease-out 1s backwards;
+            font-style: italic;
+        }
+
+        /* Photo Slideshow */
+        .slideshow-section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
+            padding: 50px;
+            margin: 30px 0;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .slideshow-section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--primary);
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .slideshow-container {
+            position: relative;
+            width: 100%;
+            height: 500px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .slide {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--secondary) 100%);
+            opacity: 0;
+            transition: opacity 1s ease;
+        }
+
+        .slide.active {
+            opacity: 1;
+        }
+
+        .slide-content {
+            text-align: center;
+            padding: 40px;
+        }
+
+        .slide-image {
+            width: 100%;
+            height: 350px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            font-style: italic;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .slide-caption {
+            font-size: 1.3rem;
+            color: var(--dark);
+            font-weight: 600;
+            margin-top: 15px;
+        }
+
+        .slideshow-controls {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .slide-button {
+            padding: 12px 25px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .slide-button:hover {
+            background: #d62839;
+            transform: scale(1.05);
+        }
+
+        .slide-dots {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(230, 57, 70, 0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .dot.active {
+            background: var(--primary);
+            transform: scale(1.3);
+        }
+
+        /* Love Messages Section */
+        .messages-section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
+            padding: 50px;
+            margin: 30px 0;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .messages-section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--primary);
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .messages-intro {
+            text-align: center;
+            font-size: 1.1rem;
+            color: var(--dark);
+            margin-bottom: 40px;
+        }
+
+        .envelopes-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .envelope {
+            position: relative;
+            width: 100%;
+            height: 180px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .envelope:hover {
+            transform: translateY(-10px);
+        }
+
+        .envelope-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: var(--primary);
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(230, 57, 70, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            color: white;
+            transition: all 0.5s ease;
+        }
+
+        .envelope.opened .envelope-back {
+            opacity: 0;
+            transform: rotateY(180deg);
+        }
+
+        .envelope-number {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .envelope-label {
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .message-content {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            transform: scale(0.9);
+            transition: all 0.5s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .envelope.opened .message-content {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .message-text {
+            font-size: 1.1rem;
+            color: var(--dark);
+            line-height: 1.6;
+            font-style: italic;
+        }
+
+        /* Final Message */
+        .final-message {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
+            padding: 60px 50px;
+            margin: 30px 0 50px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+
+        .final-message h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 30px;
+        }
+
+        .final-message p {
+            font-size: 1.3rem;
+            line-height: 2;
+            color: var(--dark);
+            margin-bottom: 25px;
+        }
+
+        .signature {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: var(--primary);
+            margin-top: 40px;
+            font-style: italic;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .welcome-screen h1 {
+                font-size: 2.5rem;
+            }
+
+            .header h1 {
+                font-size: 2.5rem;
+            }
+
+            .slideshow-section,
+            .messages-section,
+            .final-message {
+                padding: 30px 25px;
+            }
+
+            .slideshow-container {
+                height: 400px;
+            }
+
+            .envelopes-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated Hearts Background -->
+    <div class="hearts-background" id="heartsBackground"></div>
+
+    <!-- Welcome Screen -->
+    <div class="welcome-screen" id="welcomeScreen">
+        <h1>💝 Happy Valentine's Day 💝</h1>
+        <p>To the love of my life...</p>
+        <button class="start-button" onclick="startExperience()" >Open Your Gift</button>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content" id="mainContent">
+        <!-- Header with Music -->
+        <div class="header">
+            <h1>My Love Letter to You</h1>
+            <div class="music-control">
+                <div class="message-box"> <!--<audio src="Johnoy Danao - Ikaw at Ako (official music video).mp3" autoplay loop></audio> -->
+                    🎵 Every love song reminds me of you 🎵
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <!-- Photo Slideshow Section -->
+            <div class="slideshow-section">
+                <h2>Our Beautiful Moments</h2>
+                <div class="slideshow-container" id="slideshowContainer">
+                    <div class="slide active">
+                        <div class="slide-content">
+                            <img src="Messenger_creation_1A6247FE-8B66-4627-98F1-746C2367C563.jpeg" alt="Our memory" style="width: 100%; height: 350px; object-fit: cover; border-radius: 15px; box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);">
+                            <div class="slide-caption">The moment I knew you were special</div>
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <div class="slide-content">
+                            <img src="Messenger_creation_3E11B68C-7BE2-440A-AF4C-C274D1B1B0AC.jpeg" alt="Our memory 2" style="width: 100%; height: 350px; object-fit: cover; border-radius: 15px; box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);">
+                            <div class="slide-caption">Our favorite adventure together</div>
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <div class="slide-content">
+                            <img src="Messenger_creation_53AD1032-2CF7-496C-9FA4-9A7BAE5D47EB.jpeg" alt="Our memory" style="width: 100%; height: 350px; object-fit: cover; border-radius: 15px; box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);">
+                            <div class="slide-caption">A memory that makes me smile</div>
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <div class="slide-content">
+                            <img src="Messenger_creation_5BC6E822-9190-4806-BA40-6EF611AC562B.jpeg" alt="Our memory" style="width: 100%; height: 350px; object-fit: cover; border-radius: 15px; box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);">
+                            <div class="slide-caption">You and me, perfect as can be</div>
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <div class="slide-content">
+                            <img src="6e15cb16-96ab-4a43-9048-25b94b508027 - Copy.png" alt="Our memory" style="width: 100%; height: 350px; object-fit: cover; border-radius: 15px; box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);">
+                            <div class="slide-caption">Forever my favorite person</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="slideshow-controls">
+                    <button class="slide-button" onclick="changeSlide(-1)">❮ Previous</button>
+                    <button class="slide-button" onclick="changeSlide(1)">Next ❯</button>
+                </div>
+                <div class="slide-dots" id="slideDots"></div>
+            </div>
+
+            <!-- Love Messages Section -->
+            <div class="messages-section">
+                <h2>10 Reasons I Love You</h2>
+                <p class="messages-intro">Click each envelope to reveal why you mean the world to me ❤️</p>
+                <div class="envelopes-container" id="envelopesContainer">
+                    <!-- Envelopes will be generated by JavaScript -->
+                </div>
+            </div>
+
+            <!-- Final Message -->
+            <div class="final-message">
+                <h2>Forever Yours</h2>
+                <p>
+                    Hello love, kung nabasa mo na ito, natanggap mo at na scan na ang valentines present ko 
+                    for you. Sana ma enjoy ang araw na ito kahit sobrang nakaka-stress, upcoming exams, pendings, 
+                    mga nirurush, mga problema, at marami pa. Pero sana ma enjoy mo ang araw na ito kasama ako.
+                </p>
+                <p>
+                    Gagamitin ko ang mga natutunan ko sa buhay, para paligayahin ka, pasayahin ka, suyuin ka pag 
+                    may toyo ka, hilutin ka pag may masakit sa katawan mo, gamutin sugat mo, pwede ring doktor mo,
+                     damayan ka sa lahat, lalo na kapag feel mong wala ka nang ibang makakapitan masasandalan, 
+                     merong ako, at higit sa lahat ay mahalin ka.
+                <p>
+                    Hindi araw araw masaya, hindi araw araw maganda at panalo, minsan may lungkot, problema, 
+                    pagsubok, pagkakamali't hinanakit rin. Minsan o madalaw tayo ang may problema, minsan o madalas rin ay 
+                    aabot tayo sa puntong di na natin alam ang sitwasyon. Pero salamat sa lahat, sa mga sakripisyo, sa chances, 
+                    sa mga nangyare, sa haba ng sulat kong to siguro iniisip mo ang oa or wierd ko, hindi ako wierd, 
+                    nagmamahal lang ng tapat at buong puso. 
+                </p>
+
+                <p>
+                    Maraming-maraming salamat sa lahat, handa akong gawin lahat para sa'yo. Handa akong maubos, mapuno ka lang,
+                    handa akong maging clown, mapasaya ka lang, handa akong mag sakripisyo, makasama ka lang, handa kong isuko ang lahat,
+                    wag lang ikaw, handa ako sa lahat, basta tayong dalawa, walang imposible. 
+                </p>
+
+                <p>
+                    Sabay tayong bumuo pa ng mga plano, sabay tayong mangarap,sabay tayong magtagumpay, at magkasama tayong tumanda, 
+                    lovely alfaro, mahal na mahal kita, simula nung una pa lang hindi ko alam kung magiging worth ba ang risk, pero ngayon,
+                    proud and confident kong sasabihin na worth it ang lahat.
+                </p>
+
+                <p>
+                    Salamat sa lahat, Happy Valentine's Day pahinga ko, Iloveyou so much Mwaaaaaa
+                </p>
+                <p class="signature">All my love, always,<br>Your present, and future lover, Danierbert Santiago Nastor</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hidden Audio Element -->
+    <audio id="backgroundMusic" loop autoplay>
+        <source src="Johnoy Danao - Ikaw at Ako (official music video).mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        // Auto-play music on page load
+        window.addEventListener('load', function() {
+            const music = document.getElementById('backgroundMusic');
+            music.play().catch(function(error) {
+                console.log('Autoplay was prevented. Music will play after user interaction.');
+            });
+        });
+
+        // Love messages data
+        const loveMessages = [
+            "Your smile lights up my entire world and makes even the darkest days beautiful.",
+            "You always make sure that I am happy and loved.",
+            "You make me laugh like no one else can—your humor is my favorite medicine.",
+            "Your strength and resilience inspire me every single day.",
+            "The way you look at me makes me feel like the luckiest person alive.",
+            "You understand me in ways I didn't think were possible.",
+            "Your kindness and compassion make this world a better place.",
+            "Every moment with you feels like home—safe, warm, and full of love.",
+            "You challenge me to be better and support me when I fall short.",
+            "You are my best friend, my partner, and my soulmate—all in one perfect person."
+        ];
+
+        // Create floating hearts
+        const heartsBackground = document.getElementById('heartsBackground');
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'floating-heart';
+            heart.textContent = Math.random() > 0.5 ? '❤️' : '💕';
+            heart.style.left = Math.random() * 100 + '%';
+            heart.style.fontSize = (Math.random() * 20 + 20) + 'px';
+            heart.style.animationDuration = (Math.random() * 5 + 8) + 's';
+            heart.style.animationDelay = Math.random() * 5 + 's';
+            heartsBackground.appendChild(heart);
+
+            setTimeout(() => heart.remove(), 13000);
+        }
+
+        setInterval(createHeart, 800);
+        for (let i = 0; i < 10; i++) {
+            setTimeout(createHeart, i * 300);
+        }
+
+        // Start Experience
+        function startExperience() {
+            document.getElementById('welcomeScreen').classList.add('hidden');
+            document.getElementById('mainContent').classList.add('visible');
+            
+            // Start music when experience begins
+            const music = document.getElementById('backgroundMusic');
+            music.play().catch(function(error) {
+                console.log('Music playback prevented by browser.');
+            });
+        }
+
+        // Slideshow
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const dotsContainer = document.getElementById('slideDots');
+
+        // Create dots
+        slides.forEach((_, index) => {
+            const dot = document.createElement('div');
+            dot.className = 'dot' + (index === 0 ? ' active' : '');
+            dot.onclick = () => goToSlide(index);
+            dotsContainer.appendChild(dot);
+        });
+
+        function changeSlide(direction) {
+            slides[currentSlide].classList.remove('active');
+            document.querySelectorAll('.dot')[currentSlide].classList.remove('active');
+            
+            currentSlide = (currentSlide + direction + slides.length) % slides.length;
+            
+            slides[currentSlide].classList.add('active');
+            document.querySelectorAll('.dot')[currentSlide].classList.add('active');
+        }
+
+        function goToSlide(index) {
+            slides[currentSlide].classList.remove('active');
+            document.querySelectorAll('.dot')[currentSlide].classList.remove('active');
+            
+            currentSlide = index;
+            
+            slides[currentSlide].classList.add('active');
+            document.querySelectorAll('.dot')[currentSlide].classList.add('active');
+        }
+
+        // Auto-advance slideshow every 5 seconds
+        setInterval(() => changeSlide(1), 5000);
+
+        // Create Love Message Envelopes
+        const envelopesContainer = document.getElementById('envelopesContainer');
+        loveMessages.forEach((message, index) => {
+            const envelope = document.createElement('div');
+            envelope.className = 'envelope';
+            envelope.innerHTML = `
+                <div class="envelope-back">
+                    <div class="envelope-number">${index + 1}</div>
+                    <div class="envelope-label">Click to Open</div>
+                </div>
+                <div class="message-content">
+                    <div class="message-text">${message}</div>
+                </div>
+            `;
+            
+            envelope.onclick = function() {
+                this.classList.toggle('opened');
+            };
+            
+            envelopesContainer.appendChild(envelope);
+        });
+    </script>
+</body>
+</html>
